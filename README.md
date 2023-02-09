@@ -38,6 +38,4 @@ Give a ⭐️ if this project helped you!
 Copyright © 2023 [Caio Ganais](https://github.com/DevCaioGG).<br />
 This project is [MIT](https://github.com/DevCaioGG/Klassics/blob/main/LICENSE) licensed.
 
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
 
