@@ -11,17 +11,12 @@
 
 > A classic car image upload/view application written with Ktor.
 
-## Install
-
-```sh
-./gradlew run
-```
-
 ## Usage
 
 ```sh
 ./gradlew run
 ```
+Then, navigate to [http://localhost:8080/](http://localhost:8080/) and use ´root´/´root´ to login.
 
 ## Author
 
