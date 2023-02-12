@@ -18,7 +18,7 @@
 ```
 Then, navigate to [http://localhost:8080/](http://localhost:8080/) and use ´root´/´root´ to login.
 
-<p>
+
   ##Home before Login
   <img src="./.klassic-data/Inicio sin iniciar sesión.png"/>
   ##Login
@@ -29,7 +29,7 @@ Then, navigate to [http://localhost:8080/](http://localhost:8080/) and use ´roo
   <img src="./.klassic-data/Upload.png"/>
   ##Catalog
   <img src="./.klassic-data/Catalogo.png"/>
-</p>
+
 
 ## Author
 
