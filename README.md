@@ -19,7 +19,16 @@
 Then, navigate to [http://localhost:8080/](http://localhost:8080/) and use ´root´/´root´ to login.
 
 <p>
+  Home before Login
+  <img src="./.klassic-data/Inicio sin iniciar sesión.png"/>
+  Login
+  <img src="./.klassic-data/Login.png"/>
+  Home after Login
   <img src="./.klassic-data/Inicio.png"/>
+  Upload
+  <img src="./.klassic-data/Upload.png"/>
+  Catalog
+  <img src="./.klassic-data/Catalogo.png"/>
 </p>
 
 ## Author
