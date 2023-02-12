@@ -18,6 +18,10 @@
 ```
 Then, navigate to [http://localhost:8080/](http://localhost:8080/) and use ´root´/´root´ to login.
 
+<p>
+  <img src="./.klassic-data/Inicio.png"/>
+</p>
+
 ## Author
 
 👤 **Caio Ganais**
