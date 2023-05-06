@@ -1,5 +1,10 @@
 package dev.isagood.caiogg.klassics
 
+import dev.isagood.caiogg.klassics.dao.DAOFacade
+import dev.isagood.caiogg.klassics.dao.DAOFacadeImpl
+import dev.isagood.caiogg.klassics.dao.DatabaseFactory
+import dev.isagood.caiogg.klassics.models.Users
+import dev.isagood.caiogg.klassics.routes.*
 import io.ktor.http.*
 import io.ktor.resources.*
 import io.ktor.server.application.*
@@ -15,6 +20,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.exposed.sql.selectAll
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -49,14 +57,28 @@ fun Application.main() {
     if (!uploadDir.mkdirs() && !uploadDir.exists()) {
         throw IOException("Failed to create directory ${uploadDir.absolutePath}")
     }
-    val database = Database(uploadDir)
+
+    DatabaseFactory.init()
+    val dao: DAOFacade = DAOFacadeImpl()
+
+    val usersList = runBlocking {
+        //Get Hash run: echo -n caio | openssl dgst -binary -sha256 | openssl base64
+        dao.newUser("root", "root")
+        dao.newUser("caio", "caio")
+        dao.newUser("dani", "dani")
+        dao.users()
+    }
+
+    val digestFunction = getDigestFunction("SHA-256") { "ktor${it.length}" }
 
     val users = UserHashedTableAuth(
-        getDigestFunction("SHA-256") { "ktor${it.length}" },
-        table = mapOf(
-            "root" to Base64.getDecoder().decode("76pc9N9hspQqapj30kCaLJA14O/50ptCg50zCA1oxjA=") // sha256 for "root"
-        )
+        digester = digestFunction,
+        table = usersList.associate {
+            it.username to digestFunction(it.password)
+        }
     )
+
+
 
     install(Sessions) {
         cookie<KlassicSession>("SESSION") {
@@ -66,9 +88,10 @@ fun Application.main() {
 
     routing {
         login(users)
-        upload(database, uploadDir)
-        klassics(database)
+        upload(dao, uploadDir)
+        klassics(dao)
         styles()
         scripts()
     }
+
 }
